@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 
-const TextField = ({label, type, customType, name, value, onChange, placeholder, error}) => {
-    const defoultClassNameInput = "bg-gray-50 border border-gray-300 text-gray-900 " +
-     "text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " +
+const TextField = ({label, type, customType, name, value, onChange, placeholder, error, onSearch}) => {
+    const defoultClassNameInput = "bg-gray-50 border-2 border-gray-200 text-gray-900 " +
+     "focus:outline-none text-sm block w-full p-2 " + /*focus:ring-1 focus:ring-blue-500*/
      "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " +
      "dark:focus:ring-blue-500 dark:focus:border-blue-500 "
 
@@ -20,12 +20,10 @@ const TextField = ({label, type, customType, name, value, onChange, placeholder,
         onChange({ name: target.name, value: target.value });
     };
 
-    console.log('customType', customType)
-
     return ( 
         <div className="">
             <label 
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="block mb-1 text-base pl-2 font-medium text-gray-900 dark:text-gray-300"
                 htmlFor={name}>{label}
             </label>
             <div className="flex">
@@ -36,11 +34,11 @@ const TextField = ({label, type, customType, name, value, onChange, placeholder,
                 value={value}
                 onChange={handleChange}
                 placeholder={placeholder}
-                className={defoultClassNameInput + (customType!=="search" && type==="text" ? "rounded-lg " : "rounded-l-lg ")}
+                className={defoultClassNameInput + (error ? " focus:border-red-500 " : " focus:border-blue-500 ") + (customType!=="search" && type==="text" ? "rounded-lg " : "rounded-l-lg ")}
             />
              {type === "password" && (
                     <button
-                        className="5 bg-blue-300 rounded-r-lg "
+                        className="w-10 bg-blue-300 rounded-r-lg hover:bg-blue-500"
                         type="button"
                         onClick={toggleShowPassword}
                     >
@@ -49,15 +47,15 @@ const TextField = ({label, type, customType, name, value, onChange, placeholder,
             )}
             {customType === "search" && (
                     <button
-                        className="5 bg-blue-300 rounded-r-lg "
+                        className="w-10 bg-blue-300 rounded-r-lg hover:bg-blue-500"
                         type="button"
-                        /*onClick={toggleShowPassword}*/
+                        onClick={onSearch}
                     >
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>
             )}
             </div>
-            {error && <div className="">{error}</div>}
+            {error && <div className="text-xs text-red-600 pl-2">{error}</div>}
         </div>
     );
 }
