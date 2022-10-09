@@ -10,14 +10,19 @@ const TextField = ({label, type, customType, name, value, onChange, placeholder,
      "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " +
      "dark:focus:ring-blue-500 dark:focus:border-blue-500 "
 
-     const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
-     const toggleShowPassword = () => {
+    const toggleShowPassword = () => {
         setShowPassword((prevState) => !prevState);
     }
 
     const handleChange = ({ target }) => {
         onChange({ name: target.name, value: target.value });
+    };
+
+    const getInputClasses = () => {
+        return defoultClassNameInput + (error ? " focus:border-red-500 " : " focus:border-blue-500 ") 
+        + (customType!=="search" && type==="text" ? "rounded-lg " : "rounded-l-lg ");
     };
 
     return ( 
@@ -34,7 +39,7 @@ const TextField = ({label, type, customType, name, value, onChange, placeholder,
                 value={value}
                 onChange={handleChange}
                 placeholder={placeholder}
-                className={defoultClassNameInput + (error ? " focus:border-red-500 " : " focus:border-blue-500 ") + (customType!=="search" && type==="text" ? "rounded-lg " : "rounded-l-lg ")}
+                className={getInputClasses()}
             />
              {type === "password" && (
                     <button

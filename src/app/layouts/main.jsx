@@ -1,6 +1,11 @@
 import {React, useState} from "react";
+import RadioField from "../components/common/form/radioField";
+import SelectFiel from "../components/common/form/selectField";
+import TextAreaField from "../components/common/form/textAreaField";
 import TextField from "../components/common/form/textField";
+import CheckBoxField from "../components/common/form/checkBoxField"
 import { validator } from "../utils/validator";
+
 
 const Main = () => {
     const [errors, setErrors] = useState({});
@@ -11,7 +16,26 @@ const Main = () => {
         password_field: "",
         search_field: "",
         custom_field: "",
+        text_area: "",
+        select_field: "",
+        radio_field: "",
+        chack_field: false,
     });
+
+    const options = {
+        first:{
+            name:"label 1",
+            value:"f123"
+        },
+        second:{
+            name:"label 2",
+            value:"f234"
+        },
+        third:{
+            name:"label 3",
+            value:"f345"
+        },
+    };
     
     const handleChange = (target) => {
       setData((prevState) => ({
@@ -20,7 +44,6 @@ const Main = () => {
       }));
       setEnterError(null);
       validate(target.name)
-      console.log(target.name)
     };
 
     const validatorConfig = {
@@ -42,6 +65,21 @@ const Main = () => {
         custom_field: {
             isRequired: {
                 message: "custom_field requered"
+            }
+        },
+        text_area: {
+            isRequired: {
+                message: " text_area requered"
+            }
+        },
+        select_field: {
+            isRequired: {
+                message: "select_field requered"
+            }
+        },
+        chack_field: {
+            isRequired: {
+                message: "chack_field requered"
             }
         }
     };
@@ -75,7 +113,7 @@ const Main = () => {
           error={errors.password_field}
         />
         <TextField 
-          label = "Тестовий лейбл"
+          label = "Search field"
           type = "text"
           customType="search"
           name = "search_field"
@@ -85,7 +123,7 @@ const Main = () => {
           error={errors.search_field}
         />
         <TextField 
-          label = "Тестовий лейбл"
+          label = "Custom text field"
           type = "text"
           customType="any"
           name = "custom_field"
@@ -94,7 +132,43 @@ const Main = () => {
           onChange={handleChange}
           error={errors.custom_field}
         />
-        <button type="submit">chack</button>
+        <TextAreaField
+          label="Text arae"
+          name="text_area"
+          value={data.text_area}
+          placeholder="плейсхолдер для текст ериа"
+          onChange={handleChange}
+          error={errors.text_area}
+        />
+        <SelectFiel
+            label="Select field"
+            name="select_field"
+            value={data.select_field} 
+            onChange={handleChange}
+            defaultOption="def option"
+            options={options}
+            error={errors.select_field}
+        />
+        <RadioField
+            label="Radio field"
+            options={[
+                { name: "One", value: "1" },
+                { name: "Two", value: "2" },
+                { name: "Three", value: "3" }
+            ]}
+            name="radio_field"
+            onChange={handleChange}
+            value={data.radio_field}
+        />
+        <CheckBoxField
+            name="chack_field"
+            value={data.chack_field}
+            onChange={handleChange}
+            error={errors.chack_field}
+        >
+            Подтвердить <a>лицензионное соглашение</a>
+        </CheckBoxField>
+        
       </header>
     </div>
     );
