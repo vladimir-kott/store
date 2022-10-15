@@ -1,10 +1,19 @@
 import {React} from "react";
-import TextField from "./components/common/form/textField";
+import NavBar from "./components/ui/navBar";
 import Main from "./layouts/main";
+import Carousel from "./components/ui/carousel";
+import Footer from "./components/ui/footer";
 
 function App() {
   return (
-    <Main/>
+  <div>
+    <NavBar/>
+    <div className="container mx-auto">
+      <Carousel/>
+      <Main/>
+    </div>
+    <Footer/>
+  </div>
   );
 }
 

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 
-const TextField = ({label, type, customType, name, value, onChange, placeholder, error, onSearch}) => {
+const TextField = ({label, showLabel, type, customType, name, value, onChange, placeholder, error, onSearch}) => {
     const defoultClassNameInput = "bg-gray-50 border-2 border-gray-200 text-gray-900 " +
      "focus:outline-none text-sm block w-full p-2 " + /*focus:ring-1 focus:ring-blue-500*/
      "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white " +
@@ -27,10 +27,12 @@ const TextField = ({label, type, customType, name, value, onChange, placeholder,
 
     return ( 
         <div className="">
-            <label 
-                className="block mb-1 text-base pl-2 font-medium text-gray-900 dark:text-gray-300"
-                htmlFor={name}>{label}
-            </label>
+            {showLabel && (
+                <label 
+                    className="block mb-1 text-base pl-2 font-medium text-gray-900 dark:text-gray-300"
+                    htmlFor={name}>{label}
+                </label>
+            )}
             <div className="flex">
             <input 
                 type={showPassword ? "text" : type}
@@ -66,10 +68,12 @@ const TextField = ({label, type, customType, name, value, onChange, placeholder,
 }
 TextField.defaultProps = {
     type: "text",
-    customType: "text"
+    customType: "text",
+    showLabel: true
 };
 TextField.propTypes = {
     label: PropTypes.string,
+    showLabel: PropTypes.bool,
     type: PropTypes.string,
     name: PropTypes.string,
     value: PropTypes.string,

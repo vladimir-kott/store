@@ -5,10 +5,13 @@ import TextAreaField from "../components/common/form/textAreaField";
 import TextField from "../components/common/form/textField";
 import CheckBoxField from "../components/common/form/checkBoxField"
 import { validator } from "../utils/validator";
+import PrimaryButton from "../components/common/form/primaryButton";
+import SecondaryButton from "../components/common/form/seconaryButton";
 
 
 const Main = () => {
     const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false)
     const [enterError, setEnterError] = useState(null);
 
     const [data, setData] = useState({
@@ -45,6 +48,11 @@ const Main = () => {
       setEnterError(null);
       validate(target.name)
     };
+
+    const handleClick = (target) => {
+        console.log('click ', target)
+        setLoading(prevState => !prevState)
+    }
 
     const validatorConfig = {
         text_field: {
@@ -92,7 +100,6 @@ const Main = () => {
 
 
     return (  
-        <div className="App">
       <header className="w-full h-full">
         <TextField 
           label = "Text field"
@@ -168,9 +175,20 @@ const Main = () => {
         >
             Подтвердить <a>лицензионное соглашение</a>
         </CheckBoxField>
-        
+        <PrimaryButton
+            name="primary_button"
+            label="Отправить"
+            loading={loading}
+            onClick={handleClick}
+        />
+        <SecondaryButton
+            name="secondary_button"
+            label="Отправить"
+            loading={loading}
+            onClick={handleClick}
+        />
       </header>
-    </div>
+    
     );
 }
  
