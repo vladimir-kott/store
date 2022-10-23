@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import PropTypes from "prop-types";
 import TextField from "../common/form/textField";
 import { validator } from "../../utils/validator";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
 
@@ -95,11 +97,14 @@ const NavBar = () => {
                 <div className="flex justify-between py-2.5">
                     <div>
                         <a href="https://#" class="flex items-center">
-                            <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
-                            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                            <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="DEV-Y Store" />
+                            <div className="">
+                                <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">DEV-Y</span>
+                                
+                            </div>
                         </a>
                     </div>
-                    <div className="w-[350px]">
+                    <div className="w-[350px] hidden sm:block">
                         <TextField 
                             label = "Search field"
                             showLabel={false}
@@ -113,15 +118,15 @@ const NavBar = () => {
                         />
                     </div>
                     <div>
-                        <div className="flex">
-                            <a href="https://#" class="flex items-center">
-                                <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+                        <div className="flex ">
+                            <a href="https://#" className="flex items-center justify-center rounded-full mr-2 bg-white w-10 h-10">
+                                <FontAwesomeIcon className="text-xl" icon={faCartShopping}/>
                             </a>
-                            <a href="https://#" class="flex items-center">
-                                <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+                            <a href="https://#" className="flex items-center justify-center rounded-full mr-2 bg-white w-10 h-10">
+                                <FontAwesomeIcon className="text-xl " icon={faUser}/>
                             </a>
-                            <a href="https://#" class="flex items-center">
-                                <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+                            <a href="https://#" className="flex items-center justify-center rounded-full mr-2 bg-white w-10 h-10">
+                                <FontAwesomeIcon className="text-xl " icon={faCartShopping}/>
                             </a>
                         </div>
                     </div>
